@@ -1,0 +1,7 @@
+{
+    "winopacity.opacity": 170,
+    "files.associations": {
+        "*.ttml": "xml",
+        "*.ttss": "css"
+    }
+}

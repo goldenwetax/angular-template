@@ -1,0 +1,58 @@
+gridster {
+  position: relative;
+  box-sizing: border-box;
+  background: grey;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  display: block;
+}
+
+gridster.fit {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+gridster.scrollVertical {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+gridster.scrollHorizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+gridster.fixed {
+  overflow: auto;
+}
+
+gridster.mobile {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+gridster.mobile gridster-item {
+  position: relative;
+}
+
+gridster .gridster-column, gridster .gridster-row {
+  position: absolute;
+  display: none;
+  transition: .3s;
+  box-sizing: border-box;
+}
+
+gridster.display-grid .gridster-column, gridster.display-grid .gridster-row {
+  display: block;
+}
+
+gridster .gridster-column {
+  border-left: 0.5px dashed rgba(255,255,255,0.2);
+  border-right: 0.5px dashed rgba(255,255,255,0.2);
+}
+
+gridster .gridster-row {
+  border-top: 0.5px dashed rgba(255,255,255,0.2);
+  border-bottom: 0.5px dashed rgba(255,255,255,0.2);
+}

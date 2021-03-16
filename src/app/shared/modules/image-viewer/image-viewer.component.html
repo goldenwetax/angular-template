@@ -1,0 +1,67 @@
+<div class="img-container-content" *ngIf="preivewVisible">
+
+  <!-- 预览区 -->
+  <div [ngxToggleFullscreen]="fullscreen" 
+       class="img-container"
+       [style.backgroundColor]="config.containerBackgroundColor" 
+       (wheel)="scrollZoom($event)"
+       (dragover)="onDragOver($event)">
+
+      <img [src]="src[index]" 
+           [ngStyle]="style" 
+           alt="暂无照片" 
+           (dragstart)="onDragStart($event)"
+           (load)="onLoad()" 
+           (loadstart)="onLoadStart()" 
+      />
+
+    <div class="spinner-container" *ngIf="loading">
+      <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
+      <ng-template #indicatorTemplate>
+        <i nz-icon nzType="loading"></i>
+      </ng-template>
+    </div>
+
+    <!-- 占位 解决拖拽时显示按钮问题 -->
+    <button style="display: none;"></button>
+    
+    <!-- 左旋转 -->
+    <button type="button" [class]="config.btnClass" *ngIf="config.btnShow.rotateCounterClockwise" (click)="rotateCounterClockwise()">
+      <i nz-icon nzType="undo" nzTheme="outline"></i>
+    </button>
+    <!-- 右旋转 -->
+    <button type="button" [class]="config.btnClass" *ngIf="config.btnShow.rotateClockwise" (click)="rotateClockwise()">
+      <i nz-icon nzType="redo" nzTheme="outline"></i>
+    </button>
+    <!-- 缩小 -->
+    <button type="button" [class]="config.btnClass" *ngIf="config.btnShow.zoomOut" (click)="zoomOut()">
+      <i nz-icon nzType="zoom-out" nzTheme="outline"></i>
+    </button>
+    <!-- 放大 -->
+    <button type="button" [class]="config.btnClass" *ngIf="config.btnShow.zoomIn" (click)="zoomIn()">
+      <i nz-icon nzType="zoom-in" nzTheme="outline"></i>
+    </button>
+    <!-- 全屏 -->
+    <button type="button" [class]="config.btnClass" (click)="toggleFullscreen()" *ngIf="config.allowFullscreen">
+      <i *ngIf="fullscreen" nz-icon nzType="fullscreen-exit" nzTheme="outline"></i>
+      <i *ngIf="!fullscreen" nz-icon nzType="fullscreen" nzTheme="outline"></i>
+    </button>
+    <!-- 自定义按钮 -->
+    <button type="button" [class]="config.btnClass" *ngFor="let cBtn of config.customBtns" (click)="fireCustomEvent(cBtn.name, index)">
+      <span [class]="cBtn.icon"></span>
+    </button>
+    <!-- 关闭 -->
+    <button type="button" id="ngx-fs-btn" [class]="config.btnClass" (click)="closePreview()">
+      <i nz-icon nzType="close" nzTheme="outline"></i>
+    </button>
+    <!-- 翻页 -->
+    <div class="nav-button-container" *ngIf="src.length > 1">
+      <button type="button" [class]="config.btnClass" (click)="prevImage($event)" [disabled]="index === 0">
+        <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+      </button>
+      <button type="button" [class]="config.btnClass" (click)="nextImage($event)" [disabled]="index === src.length - 1">
+        <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+      </button>
+    </div>
+  </div>
+</div>
